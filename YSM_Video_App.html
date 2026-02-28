@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YSM Video App</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('ysm_background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+        }
+
+        .overlay {
+            background: rgba(0,0,0,0.7);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        .box {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            margin: 20px auto;
+            width: 300px;
+            border-radius: 15px;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            background: gold;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay">
+    <h1>YSM Video App</h1>
+
+    <div class="box">
+        <h3>Login</h3>
+        <input type="text" id="username" placeholder="Enter Username">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div class="box" id="uploadSection" style="display:none;">
+        <h3>Upload Video</h3>
+        <input type="file" id="videoFile" accept="video/*">
+        <button onclick="uploadVideo()">Post</button>
+    </div>
+
+    <div class="box">
+        <h3>Videos</h3>
+        <div id="videoList"></div>
+    </div>
+</div>
+
+<script>
+let users = ["YSM789", "YSM700"];
+let currentUser = "";
+
+function login() {
+    let username = document.getElementById("username").value;
+    if (users.includes(username)) {
+        currentUser = username;
+        alert("Login berjaya sebagai " + username);
+        document.getElementById("uploadSection").style.display = "block";
+    } else {
+        alert("Akaun tidak wujud!");
+    }
+}
+
+function uploadVideo() {
+    let fileInput = document.getElementById("videoFile");
+    let file = fileInput.files[0];
+
+    if (!file) {
+        alert("Sila pilih video dahulu!");
+        return;
+    }
+
+    let url = URL.createObjectURL(file);
+    let video = document.createElement("video");
+    video.src = url;
+    video.controls = true;
+
+    document.getElementById("videoList").appendChild(video);
+}
+</script>
+
+</body>
+</html>
