@@ -1,0 +1,75 @@
+<!DOCTYPE html><html>
+<head>
+<title>YSISS Media</title>
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:url('ysm_background.jpg') no-repeat center center fixed;
+  background-size:cover;
+  color:white;
+  text-align:center;
+}
+.overlay{
+  background:rgba(0,0,0,0.7);
+  min-height:100vh;
+  padding:20px;
+}
+.box{
+  background:rgba(255,255,255,0.1);
+  padding:20px;
+  margin:20px auto;
+  width:300px;
+  border-radius:15px;
+}
+video{
+  width:100%;
+  margin-top:10px;
+  border-radius:10px;
+}
+button,input{
+  padding:10px;
+  margin:5px;
+  border-radius:8px;
+  border:none;
+}
+button{
+  background:gold;
+  font-weight:bold;
+}
+</style>
+</head>
+<body><div class="overlay">
+<h1>YSISS Media</h1>
+<div class="box">
+<input type="text" id="username" placeholder="Username">
+<button onclick="login()">Login</button>
+</div><div class="box" id="uploadSection" style="display:none;">
+<input type="file" id="videoFile" accept="video/*">
+<button onclick="uploadVideo()">Post</button>
+</div><div class="box">
+<h3>Videos</h3>
+<div id="videoList"></div>
+</div>
+</div><script>
+let users=["YSM789","YSM700"];
+function login(){
+  let u=document.getElementById("username").value;
+  if(users.includes(u)){
+    alert("Login berjaya sebagai "+u);
+    document.getElementById("uploadSection").style.display="block";
+  }else{
+    alert("Akaun tak wujud!");
+  }
+}
+function uploadVideo(){
+  let file=document.getElementById("videoFile").files[0];
+  if(!file){alert("Pilih video dulu!");return;}
+  let url=URL.createObjectURL(file);
+  let video=document.createElement("video");
+  video.src=url;
+  video.controls=true;
+  document.getElementById("videoList").appendChild(video);
+}
+</script></body>
+</html>
